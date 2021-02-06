@@ -39,14 +39,36 @@ def post():
 
 		return redirect(url_for('blogs.myblogs'))
 
-@blogs.route('/<id>')
+@blogs.route('/delete/<id>')
+def delete(id):
+	auth_status = auth()
+
+	if not auth_status[0]:
+		flash('You must be logged in to create a blog post')
+		return redirect(url_for('login'))
+
+	posted_by = collection.find_one({
+		'_id': ObjectId(id)
+	})['posted_by']
+
+	if ObjectId(auth_status[1].id) != posted_by:
+		print('hello')
+		return redirect(url_for('index'))
+
+	collection.delete_one({
+		'_id': ObjectId(id)
+	})
+
+	flash('Blog Deleted!')
+	return redirect(url_for('index'))
+
+@blogs.route('/view/<id>')
 def show_blog(id):
 	auth_status = auth()
 	
 	post = collection.find_one({
 		'_id':ObjectId(id)
 	})
-	print(post)
 	posted_by = db.get_user(post['posted_by'])
 
 	return render_template('show_blog.html', signed_in=auth_status[0], user=auth_status[1],
@@ -55,4 +77,3 @@ def show_blog(id):
 		name=f'{posted_by["first_name"]} {posted_by["last_name"]}',
 		date=datetime.fromtimestamp(post['time']).strftime('%d/%m/%y') 
 		)
-
