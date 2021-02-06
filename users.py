@@ -6,9 +6,11 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 import db
-from db import collection
+from db import database
 
-users = Blueprint('users', __name__, template_folder='templates')
+collection = database['users']
+
+users = Blueprint('users', __name__)
 
 @users.route('/create_user', methods=['GET', 'POST'])
 def create_user():

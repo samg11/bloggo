@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Post Blog {% endblock %}
+
+{% block name %} Post Blog {% endblock %}
+
+{% block header %}
+<h1> This is where you post blogs </h1>
+{% endblock %}
+
+{% block content %}
+<form action="#" method="post">
+	<div class="mb-3">
+		<label for="blogTitleInput" class="form-label"> Title </label>
+		<input name="title" type="text" class="form-control" id="blogTitleInput" placeholder="Title">
+	</div>
+	<div class="mb-3">
+		<label for="blogContentInput" class="form-label"> Blog content </label>
+		<textarea name="content" class="form-control" id="blogContentInput" rows="5"></textarea>
+	</div>
+	<input type="submit" class="btn btn-primary" value="Submit Blog Entry">
+</form>
+{% endblock %}
+
+{% block footer %}
+<p>This is the footer block</p>
+{% endblock %}

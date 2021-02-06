@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block name %} {{ post.title }} {% endblock %}
+
+{% block header %}
+<h1> {{ post.title }} </h1>
+<h2> by {{ name }} {{ date }}</h2>
+{% endblock %}
+
+{% block content %}
+<p>
+	{% for l in post.content.split('\n') %}
+	{{ l }} <br>
+	{% endfor %}
+</p>
+
+{% endblock %}
+
+{% block footer %}
+<p>This is the footer block</p>
+{% endblock %}

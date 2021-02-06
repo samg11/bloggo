@@ -1,5 +1,13 @@
+:root {
+	--footer-height: 20%;
+}
+
 * {
 	font-family: 'Roboto', sans-serif;
+}
+
+main {
+	padding-bottom: var(--footer-height);
 }
 
 footer {
@@ -7,7 +15,7 @@ footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	height: 20%;
+	height: var(--footer-height);
 	background-color: #155269;
 	color: white;
 }
