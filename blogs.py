@@ -9,6 +9,7 @@ from bson.objectid import ObjectId
 collection = database['posts']
 
 blogs = Blueprint('blogs', __name__)
+
 @blogs.route('/')
 def myblogs():
 	auth_status = auth()
