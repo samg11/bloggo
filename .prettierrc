@@ -1,4 +1,6 @@
 {
-  "tabWidth": 4,
-  "useTabs": true
+	"tabWidth": 4,
+	"useTabs": true,
+	"editor.formatOnSave": true,
+	"html.format.wrapAttributes": "force-aligned"
 }

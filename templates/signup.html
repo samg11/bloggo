@@ -5,20 +5,20 @@
 {% block name %} Sign Up {% endblock %}
 
 {% block header %}
-    <h1>Sign Up Page</h1>
+	<h1>Sign Up Page</h1>
 {% endblock %}
 
 {% block content %}
-    <form action="{{ url_for('users.create_user') }}" method="post">
-        <input type="text" name="first_name" placeholder="First Name">
-        <input type="text" name="last_name" placeholder="Last Name">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="password2" placeholder="Confirm Password">
-        <input type="submit" value="Submit">
-    </form>
+	<form action="{{ url_for('users.create_user') }}" method="post">
+		<input type="text" name="first_name" placeholder="First Name">
+		<input type="text" name="last_name" placeholder="Last Name">
+		<input type="text" name="username" placeholder="Username">
+		<input type="password" name="password" placeholder="Password">
+		<input type="password" name="password2" placeholder="Confirm Password">
+		<input type="submit" value="Submit">
+	</form>
 {% endblock %}
 
 {% block footer %}
-    <p>This is the footer block</p>
+	<p>This is the footer block</p>
 {% endblock %}
