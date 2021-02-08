@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, url_for, request, session, flash
-from datetime import datetime
+from datetime import datetime as dt
 from auth import auth
 import db
 from db import database
@@ -15,10 +15,13 @@ def myblogs():
 	auth_status = auth()
 	if not auth_status[0]:
 		return redirect(url_for('index'))
+
+	to_date = lambda t: dt.fromtimestamp(t).strftime('%m/%d/%y')
+
 	posts = collection.find({
 		'posted_by': auth_status[1].id
 	})
-	return render_template('myblogs.html', signed_in=auth_status[0], user=auth_status[1], posts=posts, time=int(time()))
+	return render_template('myblogs.html', signed_in=auth_status[0], user=auth_status[1], posts=list(posts), time=int(time()), to_date=to_date)
 
 @blogs.route('/post', methods=['GET', 'POST'])
 def post():
@@ -53,7 +56,6 @@ def delete(id):
 	})['posted_by']
 
 	if ObjectId(auth_status[1].id) != posted_by:
-		print('hello')
 		return redirect(url_for('index'))
 
 	collection.delete_one({
@@ -76,5 +78,5 @@ def show_blog(id):
 		post=post,
 		posted_by=posted_by,
 		name=f'{posted_by["first_name"]} {posted_by["last_name"]}',
-		date=datetime.fromtimestamp(post['time']).strftime('%d/%m/%y') 
+		date=dt.fromtimestamp(post['time']).strftime('%m/%d/%y') 
 		)

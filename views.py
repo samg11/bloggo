@@ -1,7 +1,7 @@
 """The views module is responsible for setting up the main routes and pages"""
 
 # imports
-import users, blogs
+import users, blogs, profile
 from auth import auth
 import os
 from flask import Flask, render_template, redirect, url_for
@@ -12,6 +12,7 @@ load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(users.users, url_prefix='/users')
 app.register_blueprint(blogs.blogs, url_prefix='/blogs')
+app.register_blueprint(profile.profile, url_prefix='/profile')
 
 app.secret_key = os.getenv('BLOGGO_SECRET_KEY')
 

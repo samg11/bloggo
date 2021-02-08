@@ -13,7 +13,18 @@
 {% endblock %}
 
 {% block content %}
-{% for post in posts %}
+
+<div class="create-blog-button-container">
+	{% set post_link = url_for('blogs.post') %}
+	<img
+		src="{{ url_for('static', filename='images/create-blog-button.png') }}"
+		alt="New Blog"
+		id="create-blog-button"
+		onclick="window.location.pathname='{{ post_link }}'"
+	>
+</div>
+
+{% for post in posts[::-1] %}
 <div class="card text-center">
 	<div class="card-header">
 		Post
@@ -30,18 +41,7 @@
 		<button onclick="deletePost('{{ delete_url }}')" class="btn btn-danger"> Delete Post </button>
 	</div>
 	<div class="card-footer text-muted">
-		Posted
-		{% set time_ago = time-post.time %}
-		{% if time_ago < 60 %}
-		a few seconds
-		{% elif time_ago > 60 %}
-		{{ time_ago // 60 }} minute(s)
-		{% elif time_ago > 3600 %}
-		{{ time_ago // 3600 }} hour(s)
-		{% elif time_ago > 86400 %}
-		{{ time_ago // 86400 }} day(s)
-		{% endif %}
-		ago
+		{{ to_date( post.time ) }}
 	</div>
 </div>
 

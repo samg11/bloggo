@@ -10,6 +10,18 @@ main {
 	padding-bottom: var(--footer-height);
 }
 
+.create-blog-button-container {
+	width: 100%;
+	text-align: right;
+}
+
+#create-blog-button {
+	position: relative;
+	width: 100px;
+	z-index: 5;
+	cursor: pointer;
+}
+
 footer {
 	position: fixed;
 	left: 0;
@@ -19,3 +31,4 @@ footer {
 	background-color: #155269;
 	color: white;
 }
+

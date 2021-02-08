@@ -35,6 +35,9 @@
 						</li>
 						{% else %}
 						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for('blogs.myblogs') }}"> Your Profile </a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="{{ url_for('users.signout') }}"> Logout </a>
 						</li>
 						{% endif %}

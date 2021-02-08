@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} My Blogs! {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/other_user_card.css') }}">
+{% endblock %}
+
+{% block name %} My Blogs! {% endblock %}
+
+{% block header %}
+<h1> Blogs written by {{ other_user.username }} </h1>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap">
+{% for post in posts[::-1] %}
+	<div class="post">
+		<div class="postTitle">
+			{{ post.title }}
+		</div>
+		<div class="postDate">
+			{{ to_date(post.time) }}
+		</div>
+		<br>
+		<div class="postContent">
+			{% for l in post.content[:250].split('\n') %}
+			{{ l }} <br>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<p>This is the footer block</p>
+{% endblock %}
