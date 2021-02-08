@@ -15,9 +15,12 @@ def search_users():
 
 	query = request.args.get('q')
 
+	collection.create_index( [("username", "text"), ("first_name", "text"), ("last_name", "text")] )
+
+
 	results = collection.find({
-		"username": { 
-			'$regex': query
+		"$text": { 
+			'$search': query
 		}
 	})
 

@@ -24,6 +24,7 @@
 	>
 </div>
 
+{% if posts %}
 {% for post in posts[::-1] %}
 <div class="card text-center">
 	<div class="card-header">
@@ -44,8 +45,16 @@
 		{{ to_date( post.time ) }}
 	</div>
 </div>
-
 {% endfor %}
+{% else %}
+<div id="noBlogPostIMG">
+	<a href="{{ url_for('blogs.post') }}">
+		<img id="noBlogPostIMG" src="{{ url_for('static', filename='images/create-blog-if-no-blogs.png') }}" alt="CLICK ME TO CREATE A BLOG!">
+	</a>
+</div>
+
+{% endif %}
+
 {% endblock %}
 
 {% block footer %}

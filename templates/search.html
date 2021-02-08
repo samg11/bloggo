@@ -12,7 +12,7 @@
 	{% for result in results %}
 	<div class="search-result-card">
 		<h3 class="name">{{ result.full_name }}</h3>
-		<h4 class="username">Username: {{ result.username }}</h4>
+		<h4 class="username">Username: <a href="{{ url_for('profile.user', username=result.username) }}">{{ result.username }}</a></h4>
 		<h5 class="date-created">Date Created: {{  to_date(result.date_created)  }}</h5>
 	</div>
 	{% endfor %}

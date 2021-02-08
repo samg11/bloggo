@@ -39,5 +39,11 @@ def signup():
 		return redirect(url_for('index'))
 	return render_template('signup.html', signed_in=auth_status[0], user=auth_status[1])
 
+@app.route('/code')
+@app.route('/opensource')
+@app.route('/sourcecode')
+def code():
+	return redirect('https://github.com/samg11/bloggo')
+
 if __name__ == '__main__':
 	app.run(debug=True)
