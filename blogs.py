@@ -34,10 +34,21 @@ def post():
 		return render_template('postblog.html', signed_in=auth_status[0], user=auth_status[1])
 	
 	else:
+
+		if len(request.form['description']) > 241 or len(request.form['content']) > 5001:
+			if len(request.form['description']) > 241:
+				flash('Description is too long')
+
+			if len(request.form['content']) > 5001:
+				flash('Content is too long')
+				
+			return redirect(url_for('blogs.post'))
+
 		collection.insert_one({
 			'posted_by': auth_status[1].id,
 			'time': int(time()),
 			'title': request.form['title'],
+			'description': request.form['description'],
 			'content': request.form['content']
 		})
 

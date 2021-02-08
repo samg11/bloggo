@@ -1,13 +1,5 @@
-:root {
-	--footer-height: 20%;
-}
-
 * {
 	font-family: 'Roboto', sans-serif;
-}
-
-main {
-	padding-bottom: var(--footer-height);
 }
 
 .create-blog-button-container {
@@ -17,7 +9,6 @@ main {
 
 #noBlogPostIMG {
 	text-align: center;
-	z-index: 0;
 	transform: translateY(60px);
 }
 
@@ -37,14 +28,3 @@ main {
 	z-index: 5;
 	cursor: pointer;
 }
-
-footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: var(--footer-height);
-	background-color: #155269;
-	color: white;
-}
-

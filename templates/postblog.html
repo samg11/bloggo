@@ -14,14 +14,16 @@
 		<label for="blogTitleInput" class="form-label"> Title </label>
 		<input name="title" type="text" class="form-control" id="blogTitleInput" placeholder="Title">
 	</div>
+
 	<div class="mb-3">
-		<label for="blogContentInput" class="form-label"> Blog content </label>
-		<textarea name="content" class="form-control" id="blogContentInput" rows="5"></textarea>
+		<label for="blogDescriptionInput" class="form-label"> Blog Description </label>
+		<textarea maxlength="240" name="description" class="form-control" id="blogDescriptionInput" rows="3"></textarea>
+	</div>
+
+	<div class="mb-3">
+		<label for="blogContentInput" class="form-label"> Blog Content </label>
+		<textarea maxlength="5000" name="content" class="form-control" id="blogContentInput" rows="5"></textarea>
 	</div>
 	<input type="submit" class="btn btn-primary" value="Submit Blog Entry">
 </form>
-{% endblock %}
-
-{% block footer %}
-<p>This is the footer block</p>
 {% endblock %}

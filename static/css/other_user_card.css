@@ -1,49 +1,9 @@
 .post {
-	/* position: relative; */
-	margin: 0 5px;
-	padding: 10px;
-	width: 300px;
-	height: 300px;
-	text-align: center;
-	background: linear-gradient(180deg, rgba(226, 168, 168, 0.24) 25%, rgba(214, 118, 64, 0.24) 45.31%, rgba(49, 95, 165, 0.24) 86.46%);
-	border: 1px solid #000000;
-	box-sizing: border-box;
-	backdrop-filter: blur(4px);
-	/* Note: backdrop-filter has minimal browser support */
-
-	border-radius: 30px;
+	width: 400px;
+	height: 200px;
+	padding: 15px;
+	margin: 15px;
+	border-radius: 3%;
+	background-color: #d1dced;
 }
-
-.postTitle {
-	position: relative;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 36px;
-	line-height: 42px;
-	text-align: center;
-	color: #000000;
-}
-
-.postDate {
-	position: relative;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 18px;
-	line-height: 21px;
-	text-align: center;
-	color: #000000;
-}
-
-.postContent {
-	position: relative;
-	float: left;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 18px;
-	line-height: 21px;
-	color: #000000;
-}
-
-.postContent:nth-child(3) {
-	color: #636363;
-}
+  
