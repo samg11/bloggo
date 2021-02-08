@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Search {% endblock %}
+
+{% block name %} Search {% endblock %}
+
+{% block header %}
+	<h1> Search results for, "{{ query }}" </h1>
+{% endblock %}
+
+{% block content %}
+	{% for result in results %}
+	<div class="search-result-card">
+		<h3 class="name">{{ result.full_name }}</h3>
+		<h4 class="username">Username: {{ result.username }}</h4>
+		<h5 class="date-created">Date Created: {{  to_date(result.date_created)  }}</h5>
+	</div>
+	{% endfor %}
+{% endblock %}
+
+{% block footer %}
+	<p>This is the footer block</p>
+	{% if signed_in %}
+		<p>Signed In</p>
+	{% else %}
+		<p>Signed Out</p>
+	{% endif %}
+{% endblock %}

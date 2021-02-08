@@ -5,6 +5,7 @@ import encryption as enc
 from dotenv import load_dotenv
 load_dotenv()
 import os
+from time import time
 import db
 from db import database
 
@@ -26,7 +27,8 @@ def create_user():
 				'first_name': request.form['first_name'],
 				'last_name': request.form['last_name'],
 				'username': request.form['username'],
-				'password': enc.encrypt(request.form['password'])
+				'password': enc.encrypt(request.form['password']),
+				'date_created': int(time())
 			})
 
 			session['USERNAME'] = request.form['username']

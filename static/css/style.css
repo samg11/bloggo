@@ -15,6 +15,16 @@ main {
 	text-align: right;
 }
 
+.search-result-card {
+	border: 2px solid #595959;
+	padding: 5px;
+	border-radius: 5%;
+	background-color: #bdbdbd;
+	width: 350px;
+	height: 200px;
+	text-align: center;
+}
+
 #create-blog-button {
 	position: relative;
 	width: 100px;

@@ -22,9 +22,9 @@ def user_exists(u):
 def authenticate(username, password):
 	'''Authenticates user by taking a username and password as parameters'''
 	user = user_collection.find_one({ 'username': username })
-	decrypted_password = enc.decrypt(user['password']).decode()
-	if password == decrypted_password:
-		return user
-	
-	else:
-		return False
+	if user:
+		decrypted_password = enc.decrypt(user['password']).decode()
+		if password == decrypted_password:
+			return user
+
+	return False
