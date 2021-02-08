@@ -28,15 +28,14 @@
 {% for post in posts[::-1] %}
 <div class="card text-center">
 	<div class="card-header">
-		Post
+		{{ post.title }}
 	</div>
 	<div class="card-body">
-		<h5 class="card-title">{{ post.title }}</h5>
-		<p class="card-text">
-			{% for l in post.content[:50].split('\n') %}
-				{{ l }} <br>
+		<h5 class="card-title">
+			{% for l in post.description.split('\n') %}
+			{{ l }} <br>
 			{% endfor %}
-		</p>
+		</h5>
 		<a href="{{ url_for('blogs.show_blog', id=post._id) }}" class="btn btn-primary"> View Post </a>
 		{% set delete_url = url_for('blogs.delete', id=post._id) %}
 		<button onclick="deletePost('{{ delete_url }}')" class="btn btn-danger"> Delete Post </button>

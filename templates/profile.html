@@ -17,14 +17,14 @@
 {% for post in posts[::-1] %}
 	<div class="post">
 		<div class="postTitle">
-			{{ post.title }}
+			<a href="{{ url_for('blogs.show_blog', id=post._id) }}">{{ post.title }}</a>
 		</div>
 		<div class="postDate">
 			{{ to_date(post.time) }}
 		</div>
 		<br>
 		<div class="postContent">
-			{% for l in post.content[:250].split('\n') %}
+			{% for l in post.description.split('\n') %}
 			{{ l }} <br>
 			{% endfor %}
 		</div>
