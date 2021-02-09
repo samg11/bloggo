@@ -31,7 +31,10 @@ def post():
 		return redirect(url_for('login'))
 
 	elif request.method == 'GET':
-		return render_template('postblog.html', signed_in=auth_status[0], user=auth_status[1])
+		return render_template('postblog.html', signed_in=auth_status[0], user=auth_status[1],
+			content=request.args.get('content') if request.args.get('content') else '',
+			title=request.args.get('title') if request.args.get('title') else '',
+			description=request.args.get('description') if request.args.get('description') else '')
 	
 	else:
 
@@ -42,7 +45,29 @@ def post():
 			if len(request.form['content']) > 5001:
 				flash('Content is too long')
 
-			return redirect(url_for('blogs.post'))
+			return redirect(url_for('blogs.post',
+				content=request.form['content'],
+				title=request.form['title'],
+				description=request.form['description']))
+
+		title_already_exists = collection.count_documents({
+			'posted_by': auth_status[1].id,
+			'title': request.form['title'],
+		}) != 0
+
+		if title_already_exists:
+			flash('You already have a blog post with that title, please change it')
+
+			return redirect(url_for('blogs.post',
+				content=request.form['content'],
+				description=request.form['description']))
+
+		if not request.form['title'].strip() or not request.form['description'].strip() or not request.form['content'].strip():
+			flash('You cannot have an empty input field.')
+			return redirect(url_for('blogs.post',
+				title=request.form['title'],
+				content=request.form['content'],
+				description=request.form['description']))
 
 		collection.insert_one({
 			'posted_by': auth_status[1].id,
@@ -52,7 +77,10 @@ def post():
 			'content': request.form['content']
 		})
 
-		return redirect(url_for('blogs.myblogs'))
+		return redirect(url_for('blogs.myblogs',
+				content=request.form['content'],
+				title=request.form['title'],
+				description=request.form['description']))
 
 @blogs.route('/update/<id>', methods=['GET', 'POST'])
 def update(id):
@@ -71,13 +99,17 @@ def update(id):
 	if ObjectId(auth_status[1].id) != posted_by:
 		return redirect(url_for('index'))
 
+	if not(request.form['title'].strip() and request.form['description'].strip() and request.form['content'].strip()):
+		flash('You cannot have an empty input field.')
+		return redirect(url_for('blogs.myblogs'))
+
 	collection.update_one({
 		'_id': current_post['_id'],
 		'posted_by': ObjectId(auth_status[1].id)
 	},{ "$set": {
 		'posted_by': auth_status[1].id,
 		'time': current_post['time'],
-		'title': request.form['title'],
+		'title': current_post['title'],
 		'description': request.form['description'],
 		'content': request.form['content']
 	}})

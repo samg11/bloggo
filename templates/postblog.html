@@ -2,6 +2,10 @@
 
 {% block title %} Post Blog {% endblock %}
 
+{% block head %}
+<script defer src="{{ url_for('static', filename='js/textFileUpload.js') }}"></script>
+{% endblock %}
+
 {% block name %} Post Blog {% endblock %}
 
 {% block header %}
@@ -12,18 +16,24 @@
 <form action="#" method="post">
 	<div class="mb-3">
 		<label for="blogTitleInput" class="form-label"> Title </label>
-		<input name="title" type="text" class="form-control" id="blogTitleInput" placeholder="Title">
+		<input name="title" type="text" class="form-control" id="blogTitleInput" placeholder="Title" value="{{ title }}">
 	</div>
 
 	<div class="mb-3">
 		<label for="blogDescriptionInput" class="form-label"> Blog Description </label>
-		<textarea maxlength="240" name="description" class="form-control" id="blogDescriptionInput" rows="3"></textarea>
+		<textarea maxlength="240" name="description" class="form-control" id="blogDescriptionInput" rows="3">{{ description }}</textarea>
 	</div>
 
 	<div class="mb-3">
 		<label for="blogContentInput" class="form-label"> Blog Content </label>
-		<textarea maxlength="5000" name="content" class="form-control" id="blogContentInput" rows="5"></textarea>
+		<textarea maxlength="5000" name="content" class="form-control" id="blogContentInput" rows="5">{{ content }}</textarea>
+		<br>
+		<div class="mb-3">
+			<label for="input-file" class="form-label">Use Text File(optional)</label>
+			<input class="form-control form-control-sm" id="input-file" type="file">
+		</div>
 	</div>
+	<br>
 	<input type="submit" class="btn btn-primary" value="Submit Blog Entry">
 </form>
 {% endblock %}
