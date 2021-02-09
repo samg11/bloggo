@@ -53,7 +53,7 @@
 					<div class="modal-body">
 						<form action="{{ url_for('blogs.update', id=post._id) }}" method="post">
 							<div class="mb-3">
-								<label for="blogTitleInput{{ post._id }}" class="form-label">{{ post.title }}</label>
+								<label for="blogTitleInput{{ post._id }}" class="form-label">Title</label>
 								<input name="title" type="text" class="form-control" id="blogTitleInput{{ post._id }}"
 									placeholder="Title" value="{{ post.title }}">
 							</div>
