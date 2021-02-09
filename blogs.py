@@ -104,8 +104,8 @@ def delete(id):
 		'_id': ObjectId(id)
 	})
 
-	flash('Blog Deleted!')
-	return redirect(url_for('index'))
+	flash('Blog Post Deleted!')
+	return redirect(url_for('blogs.myblogs'))
 
 @blogs.route('/view/<id>')
 def show_blog(id):
