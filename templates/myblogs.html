@@ -16,17 +16,14 @@
 
 <div class="create-blog-button-container">
 	{% set post_link = url_for('blogs.post') %}
-	<img
-		src="{{ url_for('static', filename='images/create-blog-button.png') }}"
-		alt="New Blog"
-		id="create-blog-button"
-		onclick="window.location.pathname='{{ post_link }}'"
-	>
+	<img src="{{ url_for('static', filename='images/create-blog-button.png') }}" alt="New Blog" id="create-blog-button"
+		onclick="window.location.pathname='{{ post_link }}'">
 </div>
 
 {% if posts %}
+<div class="myposts">
 {% for post in posts[::-1] %}
-<div class="card text-center">
+<div class="post card text-center">
 	<div class="card-header">
 		{{ post.title }}
 	</div>
@@ -37,6 +34,52 @@
 			{% endfor %}
 		</h5>
 		<a href="{{ url_for('blogs.show_blog', id=post._id) }}" class="btn btn-primary"> View Post </a>
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+			data-bs-target="#updatePostModal{{ post._id }}">
+			Update
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="updatePostModal{{ post._id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalTitle{{ post._id }}">Update {{ post.title }}</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form action="{{ url_for('blogs.update', id=post._id) }}" method="post">
+							<div class="mb-3">
+								<label for="blogTitleInput{{ post._id }}" class="form-label">{{ post.title }}</label>
+								<input name="title" type="text" class="form-control" id="blogTitleInput{{ post._id }}"
+									placeholder="Title" value="{{ post.title }}">
+							</div>
+
+							<div class="mb-3">
+								<label for="blogDescriptionInput{{ post._id }}" class="form-label"> Blog Description </label>
+								<textarea maxlength="240" name="description" class="form-control"
+									id="blogDescriptionInput{{ post._id }}" rows="3">{{ post.description }}</textarea>
+							</div>
+
+							<div class="mb-3">
+								<label for="blogContentInput{{ post._id }}" class="form-label"> Blog Content </label>
+								<textarea maxlength="5000" name="content" class="form-control" id="blogContentInput{{ post._id }}"
+									rows="5">{{ post.content }}</textarea>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<input type="submit" class="btn btn-primary" value="Save Changes" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		{% set delete_url = url_for('blogs.delete', id=post._id) %}
 		<button onclick="deletePost('{{ delete_url }}')" class="btn btn-danger"> Delete Post </button>
 	</div>
@@ -45,10 +88,12 @@
 	</div>
 </div>
 {% endfor %}
+</div>
 {% else %}
 <div id="noBlogPostIMG">
 	<a href="{{ url_for('blogs.post') }}">
-		<img id="noBlogPostIMG" src="{{ url_for('static', filename='images/create-blog-if-no-blogs.png') }}" alt="CLICK ME TO CREATE A BLOG!">
+		<img id="noBlogPostIMG" src="{{ url_for('static', filename='images/create-blog-if-no-blogs.png') }}"
+			alt="CLICK ME TO CREATE A BLOG!">
 	</a>
 </div>
 

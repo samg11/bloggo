@@ -2,6 +2,10 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.myposts > .post:not(:first-child) {
+	margin-top: 15px;
+}
+
 .create-blog-button-container {
 	width: 100%;
 	text-align: right;

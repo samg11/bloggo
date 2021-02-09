@@ -41,7 +41,7 @@ def post():
 
 			if len(request.form['content']) > 5001:
 				flash('Content is too long')
-				
+
 			return redirect(url_for('blogs.post'))
 
 		collection.insert_one({
@@ -54,12 +54,43 @@ def post():
 
 		return redirect(url_for('blogs.myblogs'))
 
+@blogs.route('/update/<id>', methods=['GET', 'POST'])
+def update(id):
+	auth_status = auth()
+
+	if not auth_status[0]:
+		flash('You must be logged in to update a blog post')
+		return redirect(url_for('login'))
+
+	current_post = collection.find_one({
+		'_id': ObjectId(id)
+	})
+	
+	posted_by = current_post['posted_by']
+
+	if ObjectId(auth_status[1].id) != posted_by:
+		return redirect(url_for('index'))
+
+	collection.update_one({
+		'_id': current_post['_id'],
+		'posted_by': ObjectId(auth_status[1].id)
+	},{ "$set": {
+		'posted_by': auth_status[1].id,
+		'time': current_post['time'],
+		'title': request.form['title'],
+		'description': request.form['description'],
+		'content': request.form['content']
+	}})
+
+	flash('Post Updated Successfully!')
+	return redirect(url_for('blogs.myblogs'))
+
 @blogs.route('/delete/<id>')
 def delete(id):
 	auth_status = auth()
 
 	if not auth_status[0]:
-		flash('You must be logged in to create a blog post')
+		flash('You must be logged in to delete a blog post')
 		return redirect(url_for('login'))
 
 	posted_by = collection.find_one({
