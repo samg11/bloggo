@@ -10,9 +10,11 @@
 
 {% block content %}
 <h4> Blogs you follow: </h4>
+{% if signed_in %}
 <ul class="followed-users">
 	{% for u in users_following %}
 	<li><a target="_blank" href="{{ url_for('profile.user', username=u.username) }}">{{ u.username }}</a></li>
 	{% endfor %}
 </ul>
+{% endif %}
 {% endblock %}
