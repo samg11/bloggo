@@ -99,7 +99,7 @@ def update(id):
 	if ObjectId(auth_status[1].id) != posted_by:
 		return redirect(url_for('index'))
 
-	if not(request.form['title'].strip() and request.form['description'].strip() and request.form['content'].strip()):
+	if not(request.form['description'].strip() and request.form['content'].strip()):
 		flash('You cannot have an empty input field.')
 		return redirect(url_for('blogs.myblogs'))
 

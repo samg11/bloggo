@@ -5,6 +5,7 @@ import users, blogs, profile, search
 from auth import auth
 import os
 from flask import Flask, render_template, redirect, url_for
+from jinja_markdown import MarkdownExtension
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,6 +18,7 @@ app.register_blueprint(search.search,   url_prefix='/search')
 
 app.secret_key = os.getenv('BLOGGO_SECRET_KEY')
 
+app.jinja_env.add_extension(MarkdownExtension)
 
 @app.route('/')
 def index():
@@ -30,7 +32,6 @@ def login():
 	if auth_status[0]:
 		return redirect(url_for('index'))
 	return render_template('signin.html', signed_in=auth_status[0], user=auth_status[1])
-
 
 @app.route('/signup')
 def signup():

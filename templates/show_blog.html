@@ -2,6 +2,10 @@
 
 {% block title %} {{ post.title }} {% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/show-blog.css') }}">
+{% endblock %}
+
 {% block name %} {{ post.title }} {% endblock %}
 
 {% block header %}
@@ -10,10 +14,13 @@
 {% endblock %}
 
 {% block content %}
+<br><br>
 <p>
+	{% markdown -%}
 	{% for l in post.content.split('\n') %}
 	{{ l }} <br>
 	{% endfor %}
+	{%- endmarkdown %}
 </p>
 
 {% endblock %}
