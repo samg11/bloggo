@@ -17,13 +17,14 @@
 	<a href="{{ url_for('follow.unfollow_user', id=other_user.id, username=other_user.username) }}">Unfollow</a>
 {% endif %}
 {% endif %}
-{{ number_of_followers }}
 <br>
+{{ number_of_followers }}
 {% if number_of_followers != 1 %}
 followers
 {% else %}
 follower
 {% endif %}
+
 {% endblock %}
 
 {% block content %}

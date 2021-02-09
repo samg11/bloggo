@@ -14,6 +14,9 @@
 
 {% block content %}
 
+<h4>Followers: {{ number_of_followers }}</h4>
+<h4>Following: {{ number_of_following }}</h4>
+
 <div class="create-blog-button-container">
 	{% set post_link = url_for('blogs.post') %}
 	<img src="{{ url_for('static', filename='images/create-blog-button.png') }}" alt="New Blog" id="create-blog-button"

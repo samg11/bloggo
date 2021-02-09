@@ -5,6 +5,7 @@ import db
 from db import database
 from time import time
 from bson.objectid import ObjectId
+from follow import get_number_of_followers, get_number_of_following
 
 collection = database['posts']
 
@@ -21,7 +22,13 @@ def myblogs():
 	posts = collection.find({
 		'posted_by': auth_status[1].id
 	})
-	return render_template('myblogs.html', signed_in=auth_status[0], user=auth_status[1], posts=list(posts), time=int(time()), to_date=to_date)
+	return render_template('myblogs.html', signed_in=auth_status[0], user=auth_status[1],
+		posts=list(posts),
+		time=int(time()),
+		to_date=to_date,
+		number_of_followers=get_number_of_followers(auth_status[1].id),
+		number_of_following=get_number_of_following(auth_status[1].id)
+	)
 
 @blogs.route('/post', methods=['GET', 'POST'])
 def post():
@@ -143,12 +150,11 @@ def show_blog(id):
 	post = collection.find_one({
 		'_id':ObjectId(id)
 	})
-	posted_by = db.get_user(post['posted_by'])
-	print(post['center'])
+	posted_by = db.get_user(post['posted_by'], 'username')
 	return render_template('show_blog.html', signed_in=auth_status[0], user=auth_status[1],
 		post=post,
 		posted_by=posted_by,
 		name=f'{posted_by["first_name"]} {posted_by["last_name"]}',
 		date=dt.fromtimestamp(post['time']).strftime('%m/%d/%y'),
 		align='left' if not post['center'] else 'center'
-		)
+	)

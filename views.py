@@ -7,6 +7,8 @@ import os
 from flask import Flask, render_template, redirect, url_for
 from jinja_markdown import MarkdownExtension
 from dotenv import load_dotenv
+from follow import get_following
+from datetime import datetime as dt
 load_dotenv()
 
 
@@ -21,11 +23,18 @@ app.secret_key = os.getenv('BLOGGO_SECRET_KEY')
 
 app.jinja_env.add_extension(MarkdownExtension)
 
+to_date = lambda t: dt.fromtimestamp(t).strftime('%m/%d/%y')
+
 @app.route('/')
 def index():
 	auth_status = auth()
-	return render_template('index.html', signed_in=auth_status[0], user=auth_status[1])
 
+	users_following = False
+	if auth_status[0]:
+		users_following = get_following(auth_status[1].id)
+
+	return render_template('index.html', signed_in=auth_status[0], user=auth_status[1],
+		users_following=users_following, to_date=to_date)
 
 @app.route('/login')
 def login():
