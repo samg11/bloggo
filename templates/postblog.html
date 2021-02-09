@@ -9,7 +9,7 @@
 {% block name %} Post Blog {% endblock %}
 
 {% block header %}
-<h1> This is where you post blogs </h1>
+<h1> Write A Blog Post </h1>
 {% endblock %}
 
 {% block content %}
@@ -25,15 +25,21 @@
 	</div>
 
 	<div class="mb-3">
+		<label for="input-file" class="form-label">Upload a markdown File(optional)</label>
+		<input class="form-control form-control-sm" id="input-file" type="file" accept=".md">
+	</div>
+
+	<div class="mb-3">
 		<label for="blogContentInput" class="form-label"> Blog Content </label>
 		<textarea maxlength="5000" name="content" class="form-control" id="blogContentInput" rows="5">{{ content }}</textarea>
-		<br>
-		<div class="mb-3">
-			<label for="input-file" class="form-label">Use Text File(optional)</label>
-			<input class="form-control form-control-sm" id="input-file" type="file" accept="text/*">
-		</div>
+	</div>
+	<input type="submit" class="btn btn-primary" value="Submit Blog Entry">
+	<br>
+	<br>
+	<div class="form-check form-switch">
+		<input class="form-check-input" name="center" type="checkbox" id="centerSwitch">
+		<label class="form-check-label" for="centerSwitch">Center</label>
 	</div>
 	<br>
-	<input type="submit" class="btn btn-primary" value="Submit Blog Entry">
 </form>
 {% endblock %}

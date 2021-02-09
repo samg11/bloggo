@@ -3,7 +3,11 @@
 {% block title %} {{ post.title }} {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/show-blog.css') }}">
+<style>
+	header, main {
+		text-align: {{ align }};
+	}
+</style>
 {% endblock %}
 
 {% block name %} {{ post.title }} {% endblock %}

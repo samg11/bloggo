@@ -37,7 +37,6 @@ def post():
 			description=request.args.get('description') if request.args.get('description') else '')
 	
 	else:
-
 		if len(request.form['description']) > 241 or len(request.form['content']) > 5001:
 			if len(request.form['description']) > 241:
 				flash('Description is too long')
@@ -74,13 +73,11 @@ def post():
 			'time': int(time()),
 			'title': request.form['title'],
 			'description': request.form['description'],
-			'content': request.form['content']
+			'content': request.form['content'],
+			'center': request.form.get('center') == 'on'
 		})
 
-		return redirect(url_for('blogs.myblogs',
-				content=request.form['content'],
-				title=request.form['title'],
-				description=request.form['description']))
+		return redirect(url_for('blogs.myblogs'))
 
 @blogs.route('/update/<id>', methods=['GET', 'POST'])
 def update(id):
@@ -147,10 +144,11 @@ def show_blog(id):
 		'_id':ObjectId(id)
 	})
 	posted_by = db.get_user(post['posted_by'])
-
+	print(post['center'])
 	return render_template('show_blog.html', signed_in=auth_status[0], user=auth_status[1],
 		post=post,
 		posted_by=posted_by,
 		name=f'{posted_by["first_name"]} {posted_by["last_name"]}',
-		date=dt.fromtimestamp(post['time']).strftime('%m/%d/%y') 
+		date=dt.fromtimestamp(post['time']).strftime('%m/%d/%y'),
+		align='left' if not post['center'] else 'center'
 		)
