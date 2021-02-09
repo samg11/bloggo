@@ -5,16 +5,31 @@
 {% block name %} Sign Up {% endblock %}
 
 {% block header %}
-	<h1>Sign Up Page</h1>
+<h1>Sign Up Page</h1>
 {% endblock %}
 
 {% block content %}
-	<form action="{{ url_for('users.create_user') }}" method="post">
-		<input type="text" name="first_name" placeholder="First Name">
-		<input type="text" name="last_name" placeholder="Last Name">
-		<input type="text" name="username" placeholder="Username">
-		<input type="password" name="password" placeholder="Password">
-		<input type="password" name="password2" placeholder="Confirm Password">
-		<input type="submit" value="Submit">
-	</form>
+<form action="{{ url_for('users.create_user') }}" method="post">
+	<div class="mb-3">
+		<label for="firstNameInput" class="form-label">First Name</label>
+		<input type="first_name" class="form-control" name="username" id="firstNameInput">
+	</div>
+	<div class="mb-3">
+		<label for="lastNameInput" class="form-label">Last Name</label>
+		<input type="email" class="form-control" name="username" id="lastNameInput">
+	</div>
+	<div class="mb-3">
+		<label for="usernameInput" class="form-label">Username</label>
+		<input type="email" class="form-control" name="username" id="usernameInput">
+	</div>
+	<div class="mb-3">
+		<label for="loginPasswordInput" class="form-label">Password</label>
+		<input type="password" name="password" class="form-control" id="loginPasswordInput">
+	</div>
+	<div class="mb-3">
+		<label for="loginPasswordInput" class="form-label">Confirm Password</label>
+		<input type="password" name="password2" class="form-control" id="loginPasswordInput">
+	</div>
+	<input type="submit" class="btn btn-primary" value="Sign Up">
+</form>
 {% endblock %}
