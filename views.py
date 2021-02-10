@@ -42,7 +42,7 @@ def login():
 	auth_status = auth()
 	if auth_status[0]:
 		return redirect(url_for('index'))
-	flash('Incorrect username or password')
+		
 	return render_template('signin.html', signed_in=auth_status[0], user=auth_status[1])
 
 @app.route('/signup')

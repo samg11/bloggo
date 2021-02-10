@@ -20,5 +20,5 @@ def auth():
 		
 		if signed_in:
 			return [signed_in, create_user_object(user)]
-		
+			
 	return [False, False]

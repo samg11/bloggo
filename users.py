@@ -41,9 +41,13 @@ def create_user():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-	session['USERNAME'] = request.form['username']
-	session['PASSWORD'] = request.form['password']
-	return redirect(url_for('index'))
+	if db.authenticate(request.form['username'], request.form['password']):
+		session['USERNAME'] = request.form['username']
+		session['PASSWORD'] = request.form['password']
+
+	else:
+		flash('Incorrect username or password')
+	return redirect(url_for('login'))
 
 @users.route('/signout')
 def signout():
