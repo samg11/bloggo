@@ -112,8 +112,6 @@ def update(id):
 		'posted_by': ObjectId(auth_status[1].id)
 	},{ "$set": {
 		'posted_by': auth_status[1].id,
-		'time': current_post['time'],
-		'title': current_post['title'],
 		'description': request.form['description'],
 		'content': request.form['content']
 	}})

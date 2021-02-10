@@ -6,6 +6,15 @@
 	text-align: center;
 }
 
+.setting {
+	background-color: rgb(214, 214, 214);
+	padding: 20px;
+	margin: 25px;
+	width: 300px;
+	min-height: 200px;
+	border-radius: 4%;
+}
+
 .followed-users {
 	margin: 50px 20%;
 }

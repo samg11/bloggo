@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Settings {% endblock %}
+
+{% block name %} Settings {% endblock %}
+
+{% block header %}
+<h1> Settings </h1>
+{% endblock %}
+
+{% block content %}
+{% set col_size = 'col col-lg' %}
+<div class="container">
+	<div class="row">
+		<div class="{{ col_size }} setting">
+			<h3>Change Username</h3>
+			<form action="{{ url_for('settings.change_username') }}"
+				onsubmit="return confirm('Are you sure you want to change your username?')" method="post">
+				<div class="mb-3">
+					<label for="passwordInput" class="form-label">Password</label>
+					<input type="password" name="password" class="form-control" id="passwordInput" required>
+				</div>
+				<div class="mb-3">
+					<label for="usernameInput" class="form-label">New Username</label>
+					<input placeholder="{{ user.username }}" type="username" class="form-control" name="username" id="usernameInput"
+						aria-describedby="username" required>
+				</div>
+				<input type="submit" value="Change Username">
+			</form>
+		</div>
+
+		<div class="{{ col_size }} setting">
+			<h3>Change Password</h3>
+			<form action="{{ url_for('settings.change_password') }}"
+				onsubmit="return confirm('Are you sure you want to change your password?')" method="post">
+				<div class="mb-3">
+					<label for="currentPasswordInput" class="form-label">Current Password</label>
+					<input type="password" name="currentPassword" class="form-control" id="currentPasswordInput" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="newPasswordInput" class="form-label">New Password</label>
+					<input type="password" name="newPassword" class="form-control" id="newPasswordInput" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="newPasswordInput2" class="form-label">Confirm New Password</label>
+					<input type="password" name="newPassword2" class="form-control" id="newPasswordInput2" required>
+				</div>
+				<input type="submit" value="Change Password">
+			</form>
+		</div>
+		<div class="w-100"></div>
+		<div class="{{ col_size }} setting">Column</div>
+		<div class="{{ col_size }} setting">Column</div>
+	</div>
+</div>
+{% endblock %}
