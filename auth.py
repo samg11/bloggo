@@ -13,14 +13,12 @@ class User:
 def create_user_object(u):
 	return User(u['_id'], u['first_name'], u['last_name'], u['username'], u['date_created'])
 
-def auth(ret_str=False):
+def auth():
 	if session.get('USERNAME') and session.get('PASSWORD'):
-		user = authenticate(session.get('USERNAME'), session.get('PASSWORD'), True)
+		user = authenticate(session.get('USERNAME'), session.get('PASSWORD'))
 		signed_in = bool(user)
 		
 		if signed_in:
 			return [signed_in, create_user_object(user)]
-		
-		return [user, False]
 		
 	return [False, False]

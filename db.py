@@ -19,7 +19,7 @@ def user_exists(u):
 	'''Checks if a user exists in the database'''
 	return user_collection.count_documents({ "username":u })
 
-def authenticate(username, password, ret_str=False):
+def authenticate(username, password):
 	'''Authenticates user by taking a username and password as parameters'''
 	user = user_collection.find_one({ 'username': username })
 	if user:
@@ -27,6 +27,4 @@ def authenticate(username, password, ret_str=False):
 		if password == decrypted_password:
 			return user
 
-	if ret_str:
-		return 'Fail'
 	return False
