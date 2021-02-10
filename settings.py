@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, url_for, render_template, request, flash, session
 from db import database, authenticate, user_exists
+import encryption as enc
 from auth import auth
 
 collection = database['users']
@@ -29,7 +30,7 @@ def change_username():
 		return redirect(url_for('settings.index'))
 
 	if not authenticate(auth_status[1].username, request.form['password']):
-		flash('Incorrect current password')
+		flash('Incorrect current password, your username has NOT changed')
 		return redirect(url_for('settings.index'))
 
 	collection.update_one(
@@ -37,7 +38,7 @@ def change_username():
 		{ '$set': {
 			'username': request.form['username']
 		}}
-		)
+	)
 
 	session['USERNAME'] = request.form['username']
 
@@ -53,4 +54,21 @@ def change_password():
 	if request.method == 'GET':
 		return redirect(url_for('settings.index'))
 
+	if not authenticate(auth_status[1].username, request.form['currentPassword']):
+		flash('Incorrect current password, your password has NOT changed')
+		return redirect(url_for('settings.index'))
+
+	if request.form['newPassword'] != request.form['newPassword2']:
+		flash('Your passwords did not match')
+		return redirect(url_for('settings.index'))
+
+	collection.update_one(
+		{'_id': auth_status[1].id},
+		{ '$set': {
+			'password': enc.encrypt(request.form['newPassword'])
+		}}
+	)
+
+	session['PASSWORD'] = request.form['newPassword']
+	flash('Password successfully changed, make sure to save it!')
 	return redirect(url_for('settings.index'))
