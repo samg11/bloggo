@@ -11,13 +11,16 @@
 {% block header %}
 <h1> Blogs written by {{ other_user.username }} </h1>
 {% if signed_in %}
+{% if not same_user %}
 {% if not following %}
 	<a class="btn btn-primary" href="{{ url_for('follow.follow_user', id=other_user.id, username=other_user.username) }}">Follow</a>
 {% else %}
 	<a class="btn btn-danger" href="{{ url_for('follow.unfollow_user', id=other_user.id, username=other_user.username) }}">Unfollow</a>
 {% endif %}
-{% endif %}
 <br>
+{% endif %}
+{% endif %}
+
 {{ number_of_followers }}
 {% if number_of_followers != 1 %}
 followers

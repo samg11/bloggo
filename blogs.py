@@ -150,7 +150,8 @@ def show_blog(id):
 	post = collection.find_one({
 		'_id':ObjectId(id)
 	})
-	posted_by = db.get_user(post['posted_by'], 'username')
+	posted_by = db.get_user(post['posted_by'])
+	print(posted_by)
 	return render_template('show_blog.html', signed_in=auth_status[0], user=auth_status[1],
 		post=post,
 		posted_by=posted_by,

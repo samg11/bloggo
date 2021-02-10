@@ -9,15 +9,16 @@
 {% endblock %}
 
 {% block content %}
-	<form>
-		<div action="{{ url_for('users.login') }}" method="post" class="mb-3">
+	<form action="{{ url_for('users.login') }}" method="post">
+		<div class="mb-3">
 		  <label for="loginUsernameInput" class="form-label">Username</label>
-		  <input type="email" class="form-control" name="username" id="loginUsernameInput" aria-describedby="emailHelp">
+		  <input type="username" class="form-control" name="username" id="loginUsernameInput" aria-describedby="username">
 		</div>
 		<div class="mb-3">
 		  <label for="loginPasswordInput" class="form-label">Password</label>
 		  <input type="password" name="password" class="form-control" id="loginPasswordInput">
 		</div>
-		<input type="submit" class="btn btn-primary" value="Login">
+		<input type="submit" class="btn btn-primary" value="Login"> <br>
+		<a href="{{ url_for('signup') }}">Don't have an account yet? Click here to Sign Up</a>
 	  </form>
 {% endblock %}

@@ -1,20 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %} BLOG GO! {% endblock %}
+{% block title %} BLOGGO! {% endblock %}
 
 {% block name %} Home {% endblock %}
 
 {% block header %}
-	<h1>BLOG GO!</h1>
+	<h1 class="center">BLOGGO</h1>
 {% endblock %}
 
 {% block content %}
+<h5 class="center">Bloggo is a tool to make blogs using markdown. It is free, <a target="_blank" href="{{ url_for('code') }}">open source</a>, and easy to use!</h5>
 {% if signed_in %}
+
+<div class="tutorial center">
+	Create a blog post by going to <a href="{{ url_for('blogs.myblogs')}}" target="_blank">your profile</a>
+	and by clicking new blog in the top right corner. After that you can create the title, description, and the
+	content for your blog post. Bloggo uses a syntax known as <a target="_blank"
+	href="https://www.markdownguide.org/getting-started/">markdown</a> which you can use to style your content.
+	<br> <br>
+	If you still need help or have feedback, <a target="_blank" href="https://github.com/samg11/bloggo/issues">please open an issue on github</a>.
+</div>
+{% else %}
+
+<div class="center">
+	<a type="button" href="{{ url_for('login') }}" class="btn btn-primary"> Sign Up </a> <br> <br>
+	<a type="button" href="{{ url_for('signup') }}" class="btn btn-secondary"> Login </a>
+</div>
+
+{% endif %}
+
+{% if users_following %}
+<div class="center followed-users">
 <h4> Blogs you follow: </h4>
-<ul class="followed-users">
+<ul class="list-group">
 	{% for u in users_following %}
-	<li><a target="_blank" href="{{ url_for('profile.user', username=u.username) }}">{{ u.username }}</a></li>
+<a 
+	target="_blank"
+	href="{{ url_for('profile.user', username=u.username) }}"
+>
+		<li class="list-group-item">{{ u.username }}</li>
+	</a>
 	{% endfor %}
 </ul>
+</div>
 {% endif %}
+
 {% endblock %}

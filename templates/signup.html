@@ -12,15 +12,15 @@
 <form action="{{ url_for('users.create_user') }}" method="post">
 	<div class="mb-3">
 		<label for="firstNameInput" class="form-label">First Name</label>
-		<input type="first_name" class="form-control" name="username" id="firstNameInput">
+		<input type="text" class="form-control" name="first_name" id="firstNameInput">
 	</div>
 	<div class="mb-3">
 		<label for="lastNameInput" class="form-label">Last Name</label>
-		<input type="email" class="form-control" name="username" id="lastNameInput">
+		<input type="text" class="form-control" name="last_name" id="lastNameInput">
 	</div>
 	<div class="mb-3">
 		<label for="usernameInput" class="form-label">Username</label>
-		<input type="email" class="form-control" name="username" id="usernameInput">
+		<input type="username" class="form-control" name="username" id="usernameInput">
 	</div>
 	<div class="mb-3">
 		<label for="loginPasswordInput" class="form-label">Password</label>
@@ -30,6 +30,7 @@
 		<label for="loginPasswordInput" class="form-label">Confirm Password</label>
 		<input type="password" name="password2" class="form-control" id="loginPasswordInput">
 	</div>
-	<input type="submit" class="btn btn-primary" value="Sign Up">
+	<input type="submit" class="btn btn-primary" value="Sign Up"> <br>
+	<a href="{{ url_for('login') }}">Already have an account? Click here to Sign In</a>
 </form>
 {% endblock %}

@@ -2,6 +2,19 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.center {
+	text-align: center;
+}
+
+.followed-users {
+	margin: 50px 20%;
+}
+
+.tutorial {
+	padding: 0 15px;
+	margin-top: 40px;
+}
+
 .myposts > .post:not(:first-child) {
 	margin-top: 15px;
 }

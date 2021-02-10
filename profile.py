@@ -29,4 +29,5 @@ def user(username):
 
 	return render_template('profile.html', signed_in=auth_status[0], user=auth_status[1],
 		other_user=other_user, posts=list(posts), to_date=to_date, following=following,
-		number_of_followers=get_number_of_followers(other_user.id))
+		number_of_followers=get_number_of_followers(other_user.id),
+		same_user=other_user.id==auth_status[1].id)
