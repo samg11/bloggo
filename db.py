@@ -5,8 +5,8 @@ import pymongo
 import os
 
 MONGO_CONNECTION_URI = os.getenv("BLOGGO_MONGO_CONNECTION_URI")
-
-cluster = pymongo.MongoClient(MONGO_CONNECTION_URI)
+print(MONGO_CONNECTION_URI)
+cluster = pymongo.MongoClient(MONGO_CONNECTION_URI, authSource="admin")
 database = cluster['users']
 user_collection = database['users']
 
